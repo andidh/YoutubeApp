@@ -24,9 +24,15 @@
     MainScreenController *ctrl = [[MainScreenController alloc] initWithCollectionViewLayout:[UICollectionViewFlowLayout new]];
     UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:ctrl];
     
-    [UINavigationBar appearance].barTintColor = [UIColor redColor];
+    [UINavigationBar appearance].barTintColor = [UIColor colorWithRed:230/255.0 green:32/255.0 blue:31/255.0 alpha:1];
+    [UINavigationBar appearance].shadowImage = [UIImage new];
+    [[UINavigationBar appearance] setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
     application.statusBarStyle = UIStatusBarStyleLightContent;
     _window.rootViewController = nav;
+    
+    UIView *statusBackground = [[UIView alloc] initWithFrame:CGRectMake(0, 0, _window.frame.size.width, 20)];
+    statusBackground.backgroundColor = [UIColor colorWithRed:194/255.0 green:31/255.0 blue:31/255.0 alpha:1];
+    [_window addSubview:statusBackground];
     
     return YES;
 }

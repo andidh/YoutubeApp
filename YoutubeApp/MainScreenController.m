@@ -7,10 +7,13 @@
 //
 
 #import "MainScreenController.h"
+#import "MenuBar.h"
 #import "VideoCell.h"
 
 @interface MainScreenController ()
-
+{
+    MenuBar *menu;
+}
 @end
 
 @implementation MainScreenController
@@ -18,17 +21,30 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.navigationController.navigationBar.translucent = NO;
     self.collectionView.backgroundColor = [UIColor whiteColor];
+    self.view.backgroundColor = [UIColor redColor];
     [self.collectionView registerClass:[VideoCell class] forCellWithReuseIdentifier:@"cellId"];
+    [self.collectionView setContentInset:UIEdgeInsetsMake(50, 0, 0, 0)];
     
     [self setupBar];
     [self setupBarButtons];
+    [self setupMenuBar];
 }
 
+- (void)setupBarButtons{
+    UIImage *search = [UIImage imageNamed:@"search_icon"];
+    UIBarButtonItem *searchBtn = [[UIBarButtonItem alloc] initWithImage:search style:UIBarButtonItemStylePlain target:self action:@selector(handleSearch)];
+    searchBtn.tintColor = [UIColor whiteColor];
+    self.navigationItem.rightBarButtonItems = @[searchBtn];
+}
 
-- (void)setupBarButtons
+- (void)setupMenuBar
 {
+    menu = [[MenuBar alloc] initWithFrame:CGRectMake(0, 0, self.collectionView.frame.size.width, 50)];
+    [self.view addSubview:menu];
 }
+
 
 - (void)handleSearch
 {
@@ -44,7 +60,7 @@
 }
 -(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    return 2;
+    return 3;
 }
 
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath

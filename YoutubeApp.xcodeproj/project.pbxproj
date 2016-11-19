@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		998724641DE0A7C600263982 /* MenuCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 998724631DE0A7C600263982 /* MenuCell.m */; };
+		99A8F15A1DE0880F00923B90 /* MenuBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 99A8F1591DE0880F00923B90 /* MenuBar.m */; };
 		99C9835A1DE05CA600F2BFEE /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 99C983591DE05CA600F2BFEE /* main.m */; };
 		99C9835D1DE05CA600F2BFEE /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 99C9835C1DE05CA600F2BFEE /* AppDelegate.m */; };
 		99C983601DE05CA600F2BFEE /* MainScreenController.m in Sources */ = {isa = PBXBuildFile; fileRef = 99C9835F1DE05CA600F2BFEE /* MainScreenController.m */; };
@@ -17,6 +19,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		998724621DE0A7C600263982 /* MenuCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuCell.h; sourceTree = "<group>"; };
+		998724631DE0A7C600263982 /* MenuCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuCell.m; sourceTree = "<group>"; };
+		99A8F1581DE0880F00923B90 /* MenuBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuBar.h; sourceTree = "<group>"; };
+		99A8F1591DE0880F00923B90 /* MenuBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuBar.m; sourceTree = "<group>"; };
 		99C983551DE05CA600F2BFEE /* YoutubeApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YoutubeApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		99C983591DE05CA600F2BFEE /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		99C9835B1DE05CA600F2BFEE /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -106,6 +112,10 @@
 			children = (
 				99C983721DE06C6500F2BFEE /* VideoCell.h */,
 				99C983731DE06C6500F2BFEE /* VideoCell.m */,
+				99A8F1581DE0880F00923B90 /* MenuBar.h */,
+				99A8F1591DE0880F00923B90 /* MenuBar.m */,
+				998724621DE0A7C600263982 /* MenuCell.h */,
+				998724631DE0A7C600263982 /* MenuCell.m */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -180,9 +190,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				99C983601DE05CA600F2BFEE /* MainScreenController.m in Sources */,
+				998724641DE0A7C600263982 /* MenuCell.m in Sources */,
 				99C983741DE06C6500F2BFEE /* VideoCell.m in Sources */,
 				99C9835D1DE05CA600F2BFEE /* AppDelegate.m in Sources */,
 				99C9835A1DE05CA600F2BFEE /* main.m in Sources */,
+				99A8F15A1DE0880F00923B90 /* MenuBar.m in Sources */,
 				99C983771DE0712000F2BFEE /* UIView+UIView_autolayout.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
