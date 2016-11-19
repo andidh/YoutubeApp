@@ -44,26 +44,28 @@
 - (void)initializeViews
 {
     _videoImageView = [UIImageView autolayoutView];
-    _videoImageView.backgroundColor = [UIColor blueColor];
+    _videoImageView.contentMode = UIViewContentModeScaleAspectFill;
+    _videoImageView.clipsToBounds = YES;
+    _videoImageView.image = [UIImage imageNamed:@"hit_video"];
     
     _profileImageView = [UIImageView autolayoutView];
-    _profileImageView.backgroundColor = [UIColor greenColor];
+    _profileImageView.layer.cornerRadius = 22;
+    _profileImageView.layer.masksToBounds = YES;
+    _profileImageView.image = [UIImage imageNamed:@"selena_profile"];
     
     _titleLabel = [UILabel autolayoutView];
     _titleLabel.numberOfLines = 0;
-    _titleLabel.backgroundColor = [UIColor redColor];
-    _titleLabel.text = @"sdfnajsdfjksandjfas";
+    _titleLabel.text = @"Selena Gomez & The Scene - Hit The Lights";
     _titleLabel.font = [UIFont systemFontOfSize:14];
     
     _subtitleLabel = [UILabel autolayoutView];
     _subtitleLabel.numberOfLines = 0;
-    _subtitleLabel.backgroundColor = [UIColor grayColor];
     _subtitleLabel.font = [UIFont systemFontOfSize:12];
     _subtitleLabel.textColor = [UIColor lightGrayColor];
-    _subtitleLabel.text = @"jkljdfkajkdfjklafdfsdfas";
+    _subtitleLabel.text = @"SelenaGomezVEVO • 11,267,890";
     
     separatorLine = [UIView autolayoutView];
-    separatorLine.backgroundColor = [UIColor lightGrayColor];
+    separatorLine.backgroundColor = [UIColor colorWithWhite:0 alpha:0.1];
     
     
     [self addSubview:_videoImageView];
@@ -83,13 +85,14 @@
                             @"subtitle":_subtitleLabel,
                             @"line":separatorLine};
     
-    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-16-[video]-[profile(44)]-16-|" options:0 metrics:nil views:views]];
-    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-16-[video]-16-|" options:0 metrics:nil views:views]];
-    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-16-[profile(44)]-[title]-16-|" options:0 metrics:nil views:views]];
+    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-8-[video]-[profile(44)]-8-|" options:0 metrics:nil views:views]];
+    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-8-[video]-8-|" options:0 metrics:nil views:views]];
+    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-8-[profile(44)]-[title]-8-|" options:0 metrics:nil views:views]];
     [_titleLabel.topAnchor constraintEqualToAnchor:_videoImageView.bottomAnchor constant:8].active = YES;
     [_subtitleLabel.topAnchor constraintEqualToAnchor:_titleLabel.bottomAnchor constant:4].active = YES;
-    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[subtitle]-16-|" options:0 metrics:nil views:views]];
+    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[subtitle]-|" options:0 metrics:nil views:views]];
     [_subtitleLabel.leadingAnchor constraintEqualToAnchor:_titleLabel.leadingAnchor].active = YES;
+    [_subtitleLabel.bottomAnchor constraintEqualToAnchor:separatorLine.topAnchor constant:-16].active = YES;
     
     [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[line]|" options:0 metrics:nil views:views]];
     [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[line(1)]|" options:0 metrics:nil views:views]];
