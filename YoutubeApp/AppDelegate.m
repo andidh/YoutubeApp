@@ -7,6 +7,7 @@
 //
 
 #import "AppDelegate.h"
+#import "MainScreenController.h"
 
 @interface AppDelegate ()
 
@@ -17,6 +18,16 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    _window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    [_window makeKeyAndVisible];
+    
+    MainScreenController *ctrl = [[MainScreenController alloc] initWithCollectionViewLayout:[UICollectionViewFlowLayout new]];
+    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:ctrl];
+    
+    [UINavigationBar appearance].barTintColor = [UIColor redColor];
+    application.statusBarStyle = UIStatusBarStyleLightContent;
+    _window.rootViewController = nav;
+    
     return YES;
 }
 
