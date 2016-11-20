@@ -25,11 +25,15 @@
     return self;
 }
 
+-(void)configureCellForIcon:(NSString *)icon
+{
+    _imageView.image = [[UIImage imageNamed:icon] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+}
+
 
 - (void)setupViews
 {
     _imageView = [UIImageView new];
-    _imageView.image = [UIImage imageNamed:@"home"];
     _imageView.translatesAutoresizingMaskIntoConstraints = NO;
     
     [self addSubview:_imageView];
@@ -41,6 +45,16 @@
     [self.imageView.centerXAnchor constraintEqualToAnchor:self.centerXAnchor].active = YES;
     [self.imageView.centerYAnchor constraintEqualToAnchor:self.centerYAnchor].active = YES;
 
+}
+
+-(void)setHighlighted:(BOOL)highlighted
+{
+    _imageView.tintColor = highlighted ? [UIColor whiteColor] : [UIColor colorWithRed:91/255.0 green:14/255.0 blue:13/255.0 alpha:1];
+}
+
+-(void)setSelected:(BOOL)selected
+{
+    _imageView.tintColor = selected ? [UIColor whiteColor] : [UIColor colorWithRed:91/255.0 green:14/255.0 blue:13/255.0 alpha:1];
 }
 
 @end

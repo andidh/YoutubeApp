@@ -8,6 +8,8 @@
 
 #import "UIView+UIView_autolayout.h"
 #import "VideoCell.h"
+#import "Video.h"
+#import "Channel.h""
 
 @interface VideoCell()
 {
@@ -40,29 +42,65 @@
     }
     return self;
 }
-         
+
+-(void)configureCellWithVideo:(Video *)video
+{
+    [self loadProfileImageWithURL:video.channel.profileURL];
+    [self loadThumbnailImageWithURL:video.thumbnailURL];
+    _titleLabel.text = video.title;
+    NSString *views = [NSString localizedStringWithFormat:@"%@",video.views];
+    _subtitleLabel.text = [NSString stringWithFormat:@"%@ • %@", video.channel.name, views];
+}
+
+- (void)loadProfileImageWithURL:(NSString *)urlString
+{
+    NSURL *url = [NSURL URLWithString:urlString];
+    [[[NSURLSession sharedSession] dataTaskWithURL:url completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+        if (error != nil) {
+            NSLog(@"%@",error);
+            return;
+        }
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            _profileImageView.image = [UIImage imageWithData:data];
+        });
+    }] resume];
+}
+
+- (void)loadThumbnailImageWithURL:(NSString *)urlString
+{
+    NSURL *url = [NSURL URLWithString:urlString];
+    [[[NSURLSession sharedSession] dataTaskWithURL:url completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+        if (error != nil) {
+            NSLog(@"%@",error);
+            return;
+        }
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            _videoImageView.image = [UIImage imageWithData:data];
+        });
+    }] resume];
+}
+
+
 - (void)initializeViews
 {
     _videoImageView = [UIImageView autolayoutView];
     _videoImageView.contentMode = UIViewContentModeScaleAspectFill;
     _videoImageView.clipsToBounds = YES;
-    _videoImageView.image = [UIImage imageNamed:@"hit_video"];
     
     _profileImageView = [UIImageView autolayoutView];
     _profileImageView.layer.cornerRadius = 22;
     _profileImageView.layer.masksToBounds = YES;
-    _profileImageView.image = [UIImage imageNamed:@"selena_profile"];
     
     _titleLabel = [UILabel autolayoutView];
     _titleLabel.numberOfLines = 0;
-    _titleLabel.text = @"Selena Gomez & The Scene - Hit The Lights";
     _titleLabel.font = [UIFont systemFontOfSize:14];
     
     _subtitleLabel = [UILabel autolayoutView];
     _subtitleLabel.numberOfLines = 0;
     _subtitleLabel.font = [UIFont systemFontOfSize:12];
     _subtitleLabel.textColor = [UIColor lightGrayColor];
-    _subtitleLabel.text = @"SelenaGomezVEVO • 11,267,890";
     
     separatorLine = [UIView autolayoutView];
     separatorLine.backgroundColor = [UIColor colorWithWhite:0 alpha:0.1];
@@ -85,7 +123,7 @@
                             @"subtitle":_subtitleLabel,
                             @"line":separatorLine};
     
-    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-8-[video]-[profile(44)]-8-|" options:0 metrics:nil views:views]];
+    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-8-[video]-[profile(44)]" options:0 metrics:nil views:views]];
     [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-8-[video]-8-|" options:0 metrics:nil views:views]];
     [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-8-[profile(44)]-[title]-8-|" options:0 metrics:nil views:views]];
     [_titleLabel.topAnchor constraintEqualToAnchor:_videoImageView.bottomAnchor constant:8].active = YES;
