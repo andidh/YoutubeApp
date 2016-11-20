@@ -12,6 +12,8 @@
 @interface MenuBar()
 {
     UICollectionView *collection;
+    NSArray *icons;
+
 }
 @end
 
@@ -23,7 +25,10 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
+        icons = @[@"home",@"trending",@"subscriptions",@"account"];
         [self setupViews];
+        NSIndexPath *path = [NSIndexPath indexPathForRow:0 inSection:0];
+        [collection selectItemAtIndexPath:path animated:NO scrollPosition:UICollectionViewScrollPositionNone];
     }
     return self;
 }
@@ -49,7 +54,9 @@
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     MenuCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"cellId" forIndexPath:indexPath];
-    cell.backgroundColor = [UIColor blueColor];
+    NSString *icon = icons[indexPath.item];
+    [cell configureCellForIcon:icon];
+    cell.tintColor = [UIColor colorWithRed:91/255.0 green:14/255.0 blue:13/255.0 alpha:1];
     return cell;
 }
 

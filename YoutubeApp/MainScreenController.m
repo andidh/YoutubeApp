@@ -9,6 +9,10 @@
 #import "MainScreenController.h"
 #import "MenuBar.h"
 #import "VideoCell.h"
+#import "Video.h"
+#import "Channel.h"
+#import "DataManager.h"
+
 
 @interface MainScreenController ()
 {
@@ -27,10 +31,27 @@
     [self.collectionView registerClass:[VideoCell class] forCellWithReuseIdentifier:@"cellId"];
     [self.collectionView setContentInset:UIEdgeInsetsMake(50, 0, 0, 0)];
     
+//    [self generateVideos];
+    
     [self setupBar];
     [self setupBarButtons];
     [self setupMenuBar];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self.collectionView selector:@selector(reloadData) name:@"kNotificationVideoReceived" object:nil];
+    
 }
+
+//- (void)generateVideos
+//{
+//    Channel *selena = [[Channel alloc] initWithName:@"SelenaGomezVEVO" profileURL:@"selena_profile"];
+//    Video *v1 = [[Video alloc] initWithThumbnailURL:@"hit_video" Title:@"Selena Gomez & The Scene - Hit The Lightsjnknjnjkjknjnkjnnknjk" Channel:selena NumberOfViews:@925478121];
+//    Video *v2 = [[Video alloc] initWithThumbnailURL:@"slow_video" Title:@"Selena Gomez - Slow Down" Channel:selena NumberOfViews:@973288120];
+//    
+//    [videos addObject:v1];
+//    [videos addObject:v2];
+//
+//}
+
 
 - (void)setupBarButtons{
     UIImage *search = [UIImage imageNamed:@"search_icon"];
@@ -60,12 +81,14 @@
 }
 -(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    return 3;
+    return [[DataManager sharedInstance]getVideos].count;
 }
 
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     VideoCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"cellId" forIndexPath:indexPath];
+    Video *video = [[DataManager sharedInstance]getVideos][indexPath.item];
+    [cell configureCellWithVideo:video];
     return cell;
 }
 

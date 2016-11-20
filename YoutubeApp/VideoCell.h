@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+@class Video;
 
 @interface VideoCell : UICollectionViewCell
 
+
+- (void)configureCellWithVideo:(Video *)video;
 @end

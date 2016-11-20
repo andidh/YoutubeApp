@@ -10,4 +10,6 @@
 
 @interface MenuCell : UICollectionViewCell
 
+-(void)configureCellForIcon:(NSString *)icon;
+
 @end
