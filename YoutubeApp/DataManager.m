@@ -13,6 +13,7 @@
 @interface DataManager()
 {
     NSMutableArray *videosArray;
+    NSTimer *timer;
 }
 @end
 
@@ -57,6 +58,10 @@
                 
                 [videosArray addObject:video];
                 
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [self attemptToPost];
+                });
+               
                 
             }
         } @catch (NSException *exception) {
@@ -65,12 +70,17 @@
     }] resume];
 }
 
-- (void)postNotification
+- (void)attemptToPost
 {
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"kNotificationVideoReceived" object:nil];
+    [timer invalidate];
+    timer = [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(postReadyNotification) userInfo:nil repeats:NO];
 }
 
 
+- (void)postReadyNotification
+{
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"kNotificationVideoReceived" object:nil];
+}
 
 
 -(NSArray *)getVideos
