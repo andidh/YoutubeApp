@@ -45,11 +45,41 @@
 
 -(void)configureCellWithVideo:(Video *)video
 {
-    _videoImageView.image = [UIImage imageNamed:video.thumbnailURL];
+    [self loadProfileImageWithURL:video.channel.profileURL];
+    [self loadThumbnailImageWithURL:video.thumbnailURL];
     _titleLabel.text = video.title;
-    _profileImageView.image = [UIImage imageNamed:video.channel.profileURL];
     NSString *views = [NSString localizedStringWithFormat:@"%@",video.views];
     _subtitleLabel.text = [NSString stringWithFormat:@"%@ • %@", video.channel.name, views];
+}
+
+- (void)loadProfileImageWithURL:(NSString *)urlString
+{
+    NSURL *url = [NSURL URLWithString:urlString];
+    [[[NSURLSession sharedSession] dataTaskWithURL:url completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+        if (error != nil) {
+            NSLog(@"%@",error);
+            return;
+        }
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            _profileImageView.image = [UIImage imageWithData:data];
+        });
+    }] resume];
+}
+
+- (void)loadThumbnailImageWithURL:(NSString *)urlString
+{
+    NSURL *url = [NSURL URLWithString:urlString];
+    [[[NSURLSession sharedSession] dataTaskWithURL:url completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+        if (error != nil) {
+            NSLog(@"%@",error);
+            return;
+        }
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            _videoImageView.image = [UIImage imageWithData:data];
+        });
+    }] resume];
 }
 
 

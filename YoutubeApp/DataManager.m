@@ -22,13 +22,21 @@
 +(instancetype)sharedInstance
 {
     static dispatch_once_t once;
-    static id _sharedInstance = nil;
+    static DataManager *_sharedInstance = nil;
     dispatch_once(&once, ^{
         _sharedInstance = [[self alloc] init];
-        [_sharedInstance fetchVideos];
     });
     
     return _sharedInstance;
+}
+
+- (instancetype)init
+{
+    self = [super init];
+    if(self) {
+        [self fetchVideos];
+    }
+    return self;
 }
 
 
