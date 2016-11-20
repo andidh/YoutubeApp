@@ -1,5 +1,5 @@
 //
-//  ViewController.h
+//  MenuCell.h
 //  YoutubeApp
 //
 //  Created by Dehelean Andrei on 11/19/16.
@@ -8,8 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ViewController : UIViewController
-
+@interface MenuCell : UICollectionViewCell
 
 @end
-
