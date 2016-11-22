@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		997CA3B11DE4AFE80037FFF4 /* MenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = 997CA3B01DE4AFE80037FFF4 /* MenuView.m */; };
+		997CA3B41DE4BA620037FFF4 /* SettingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 997CA3B31DE4BA620037FFF4 /* SettingCell.m */; };
 		998724641DE0A7C600263982 /* MenuCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 998724631DE0A7C600263982 /* MenuCell.m */; };
 		99A8F15A1DE0880F00923B90 /* MenuBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 99A8F1591DE0880F00923B90 /* MenuBar.m */; };
 		99AF848A1DE19A91007FD460 /* DataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 99AF84891DE19A91007FD460 /* DataManager.m */; };
@@ -22,6 +24,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		997CA3AF1DE4AFE80037FFF4 /* MenuView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuView.h; sourceTree = "<group>"; };
+		997CA3B01DE4AFE80037FFF4 /* MenuView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuView.m; sourceTree = "<group>"; };
+		997CA3B21DE4BA620037FFF4 /* SettingCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingCell.h; sourceTree = "<group>"; };
+		997CA3B31DE4BA620037FFF4 /* SettingCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingCell.m; sourceTree = "<group>"; };
 		998724621DE0A7C600263982 /* MenuCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuCell.h; sourceTree = "<group>"; };
 		998724631DE0A7C600263982 /* MenuCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuCell.m; sourceTree = "<group>"; };
 		99A8F1581DE0880F00923B90 /* MenuBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuBar.h; sourceTree = "<group>"; };
@@ -126,6 +132,10 @@
 				99A8F1591DE0880F00923B90 /* MenuBar.m */,
 				998724621DE0A7C600263982 /* MenuCell.h */,
 				998724631DE0A7C600263982 /* MenuCell.m */,
+				997CA3AF1DE4AFE80037FFF4 /* MenuView.h */,
+				997CA3B01DE4AFE80037FFF4 /* MenuView.m */,
+				997CA3B21DE4BA620037FFF4 /* SettingCell.h */,
+				997CA3B31DE4BA620037FFF4 /* SettingCell.m */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -214,10 +224,12 @@
 			files = (
 				99C983601DE05CA600F2BFEE /* MainScreenController.m in Sources */,
 				99AF848A1DE19A91007FD460 /* DataManager.m in Sources */,
+				997CA3B41DE4BA620037FFF4 /* SettingCell.m in Sources */,
 				99DE01491DE0C30200D3C0BF /* Video.m in Sources */,
 				998724641DE0A7C600263982 /* MenuCell.m in Sources */,
 				99C983741DE06C6500F2BFEE /* VideoCell.m in Sources */,
 				99C9835D1DE05CA600F2BFEE /* AppDelegate.m in Sources */,
+				997CA3B11DE4AFE80037FFF4 /* MenuView.m in Sources */,
 				99C9835A1DE05CA600F2BFEE /* main.m in Sources */,
 				99A8F15A1DE0880F00923B90 /* MenuBar.m in Sources */,
 				99DE014C1DE0C7C000D3C0BF /* Channel.m in Sources */,

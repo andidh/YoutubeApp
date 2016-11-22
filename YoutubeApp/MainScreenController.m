@@ -12,6 +12,7 @@
 #import "Video.h"
 #import "Channel.h"
 #import "DataManager.h"
+#import "MenuView.h"
 
 
 @interface MainScreenController ()
@@ -57,7 +58,11 @@
     UIImage *search = [UIImage imageNamed:@"search_icon"];
     UIBarButtonItem *searchBtn = [[UIBarButtonItem alloc] initWithImage:search style:UIBarButtonItemStylePlain target:self action:@selector(handleSearch)];
     searchBtn.tintColor = [UIColor whiteColor];
-    self.navigationItem.rightBarButtonItems = @[searchBtn];
+    
+    UIImage *menuIcon = [UIImage imageNamed:@"nav_more_icon"];
+    UIBarButtonItem *menuButton = [[UIBarButtonItem alloc] initWithImage:menuIcon style:UIBarButtonItemStylePlain target:self action:@selector(showMenu)];
+    menuButton.tintColor = [UIColor whiteColor];
+    self.navigationItem.rightBarButtonItems = @[menuButton, searchBtn];
 }
 
 - (void)setupMenuBar
@@ -66,6 +71,12 @@
     [self.view addSubview:menu];
 }
 
+
+- (void)showMenu
+{
+    MenuView *slideMenu = [[MenuView alloc] init];
+    [slideMenu show];
+}
 
 - (void)handleSearch
 {

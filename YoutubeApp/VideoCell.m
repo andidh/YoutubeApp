@@ -9,11 +9,13 @@
 #import "UIView+UIView_autolayout.h"
 #import "VideoCell.h"
 #import "Video.h"
-#import "Channel.h""
+#import "Channel.h"
 
 @interface VideoCell()
 {
     UIView *separatorLine;
+    NSURLSessionDataTask *task;
+    NSCache *imageCache;
 }
 
 @property (nonatomic) UIImageView *videoImageView;
@@ -30,6 +32,7 @@
     self = [super initWithFrame:frame];
     if (self) {
         [self initializeViews];
+        imageCache = [[NSCache alloc] init];
     }
     return self;
 }
@@ -54,6 +57,12 @@
 
 - (void)loadProfileImageWithURL:(NSString *)urlString
 {
+    UIImage *cachedImage = [imageCache objectForKey:urlString];
+    if (cachedImage) {
+        _profileImageView.image = cachedImage;
+        return;
+    }
+    
     NSURL *url = [NSURL URLWithString:urlString];
     [[[NSURLSession sharedSession] dataTaskWithURL:url completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
         if (error != nil) {
@@ -62,26 +71,50 @@
         }
         
         dispatch_async(dispatch_get_main_queue(), ^{
-            _profileImageView.image = [UIImage imageWithData:data];
+            UIImage *image = [UIImage imageWithData:data];
+            _profileImageView.image = image;
+            [imageCache setObject:image forKey:urlString];
         });
     }] resume];
 }
 
 - (void)loadThumbnailImageWithURL:(NSString *)urlString
 {
+    UIImage *cachedImage = [imageCache objectForKey:urlString];
+    if (cachedImage) {
+        _videoImageView.image = cachedImage;
+        return;
+    }
+    
     NSURL *url = [NSURL URLWithString:urlString];
-    [[[NSURLSession sharedSession] dataTaskWithURL:url completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+    task = [[NSURLSession sharedSession] dataTaskWithURL:url completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
         if (error != nil) {
             NSLog(@"%@",error);
             return;
         }
         
         dispatch_async(dispatch_get_main_queue(), ^{
-            _videoImageView.image = [UIImage imageWithData:data];
+            UIImage *image = [UIImage imageWithData:data];
+            _videoImageView.image = image;
+            [imageCache setObject:image forKey:urlString];
         });
-    }] resume];
+    }];
+    [task resume];
 }
 
+-(void)prepareForReuse
+{
+    [super prepareForReuse];
+    
+    [task cancel];
+    task = nil;
+    
+    _profileImageView.image = nil;
+    _videoImageView.image = nil;
+    _subtitleLabel.text = nil;
+    _titleLabel.text = nil;
+    
+}
 
 - (void)initializeViews
 {
@@ -91,6 +124,7 @@
     
     _profileImageView = [UIImageView autolayoutView];
     _profileImageView.layer.cornerRadius = 22;
+    _profileImageView.contentMode = UIViewContentModeScaleAspectFill;
     _profileImageView.layer.masksToBounds = YES;
     
     _titleLabel = [UILabel autolayoutView];
